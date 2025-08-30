@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
+import { useBooking } from '../contexts/BookingContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const Payment = () => {
   const [paymentCompleted, setPaymentCompleted] = useState(false);
@@ -8,6 +10,8 @@ const Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { clearCart } = useCart();
+  const { addBooking } = useBooking();
+  const { user } = useAuth();
   
   const { eventTitle, amount = 1, cartItems, isCartCheckout, eventDate, eventLocation } = location.state || {};
   const defaultUpiId = '7695886223@fam';
@@ -22,6 +26,34 @@ const Payment = () => {
 
   const confirmPayment = () => {
     const ticketId = 'TKT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+    
+    // Add booking to user's bookings
+    if (user) {
+      if (isCartCheckout && cartItems) {
+        // Add each cart item as separate booking
+        cartItems.forEach(item => {
+          addBooking({
+            eventTitle: item.title,
+            eventDate: item.date,
+            eventLocation: item.location,
+            eventImage: item.image,
+            amount: item.quantity,
+            userEmail: user.email,
+            quantity: item.quantity
+          }, ticketId + '_' + item.id);
+        });
+      } else {
+        // Single event booking
+        addBooking({
+          eventTitle,
+          eventDate: eventDate || new Date().toLocaleDateString(),
+          eventLocation: eventLocation || 'Event Venue',
+          amount,
+          userEmail: user.email,
+          quantity: 1
+        }, ticketId);
+      }
+    }
     
     if (isCartCheckout) {
       clearCart();
