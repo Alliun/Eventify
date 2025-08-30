@@ -9,6 +9,7 @@ const EventList = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [currentTitle, setCurrentTitle] = useState('Home');
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -409,16 +410,24 @@ const EventList = () => {
           >
             {event.image && <img src={event.image} alt={event.title} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '12px', marginBottom: '15px' }} />}
             <h3 style={{ marginBottom: '10px', color: '#00d4ff' }}>{event.title}</h3>
-            <p style={{ marginBottom: '10px', opacity: '0.9' }}>{event.description}</p>
             <p style={{ marginBottom: '5px' }}><strong>📅 Date:</strong> {event.date}</p>
             <p style={{ marginBottom: '20px' }}><strong>📍 Location:</strong> {event.location}</p>
-            <button 
-              onClick={() => bookEvent(event)}
-              className="btn-primary"
-              style={{ padding: '12px 24px', fontSize: '14px', width: '100%' }}
-            >
-              🎫 Book Event - ₹1
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <button 
+                onClick={() => setSelectedEvent(event)}
+                className="btn-secondary"
+                style={{ padding: '12px 24px', fontSize: '14px', width: '100%' }}
+              >
+                ℹ️ More Info
+              </button>
+              <button 
+                onClick={() => bookEvent(event)}
+                className="btn-primary"
+                style={{ padding: '12px 24px', fontSize: '14px', width: '100%' }}
+              >
+                🎫 Book - ₹1
+              </button>
+            </div>
           </div>
           ))}
         </div>
@@ -426,6 +435,71 @@ const EventList = () => {
           <div style={{ textAlign: 'center', padding: '50px', opacity: '0.7' }}>
             <h3>No events found</h3>
             <p>Try adjusting your filters or check back later!</p>
+          </div>
+        )}
+        
+        {selectedEvent && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.8)',
+            backdropFilter: 'blur(10px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000
+          }}>
+            <div className="card" style={{ 
+              padding: '30px', 
+              maxWidth: '600px', 
+              width: '90%',
+              maxHeight: '80vh',
+              overflow: 'auto'
+            }}>
+              {selectedEvent.image && (
+                <img 
+                  src={selectedEvent.image} 
+                  alt={selectedEvent.title} 
+                  style={{ 
+                    width: '100%', 
+                    height: '300px', 
+                    objectFit: 'cover', 
+                    borderRadius: '12px', 
+                    marginBottom: '20px' 
+                  }} 
+                />
+              )}
+              <h2 style={{ marginBottom: '15px', color: '#00d4ff' }}>{selectedEvent.title}</h2>
+              <p style={{ marginBottom: '15px', fontSize: '16px', lineHeight: '1.6' }}>{selectedEvent.description}</p>
+              <div style={{ marginBottom: '20px' }}>
+                <p style={{ marginBottom: '8px' }}><strong>📅 Date:</strong> {selectedEvent.date}</p>
+                <p style={{ marginBottom: '8px' }}><strong>📍 Location:</strong> {selectedEvent.location}</p>
+                <p style={{ marginBottom: '8px' }}><strong>🏷️ Category:</strong> {selectedEvent.category}</p>
+                <p style={{ marginBottom: '8px' }}><strong>💰 Price:</strong> ₹1</p>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button 
+                  onClick={() => {
+                    setSelectedEvent(null);
+                    bookEvent(selectedEvent);
+                  }}
+                  className="btn-primary"
+                  style={{ padding: '12px 24px', fontSize: '14px', flex: '1' }}
+                >
+                  🎫 Book Event - ₹1
+                </button>
+                <button 
+                  onClick={() => setSelectedEvent(null)}
+                  className="btn-secondary"
+                  style={{ padding: '12px 24px', fontSize: '14px', flex: '1' }}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
