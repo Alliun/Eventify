@@ -32,6 +32,42 @@ const HeroBanner = ({ events }) => {
       textAlign: 'center',
       marginBottom: '30px'
     }}>
+      {/* Search Bar */}
+      <div style={{
+        position: 'absolute',
+        top: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 10
+      }}>
+        <input
+          type="text"
+          placeholder="✨ Search events..."
+          onChange={(e) => {
+            const params = new URLSearchParams(window.location.search);
+            if (e.target.value) {
+              params.set('search', e.target.value);
+            } else {
+              params.delete('search');
+            }
+            window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
+            window.dispatchEvent(new Event('popstate'));
+          }}
+          style={{
+            background: 'rgba(0, 0, 0, 0.9)',
+            backdropFilter: 'blur(20px)',
+            border: '2px solid rgba(255, 255, 255, 0.4)',
+            color: 'white',
+            padding: '12px 20px',
+            borderRadius: '25px',
+            fontSize: '16px',
+            width: '500px',
+            textAlign: 'center',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6)'
+          }}
+        />
+      </div>
+      
       <div style={{ maxWidth: '800px', padding: '0 20px' }}>
         <h1 style={{ 
           fontSize: '3rem', 

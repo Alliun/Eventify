@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { openLocationModal } from './EventList';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -56,61 +57,31 @@ const Navbar = () => {
         ✨ Eventify
       </Link>
       
-      {/* Right - Search, Location, User */}
+      {/* Right - Location, User */}
       <div style={{ display: 'flex', gap: '15px', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '10px', flexWrap: 'wrap' }}>
-        <input
-          type="text"
-          placeholder="🔍 Search events..."
-          onChange={(e) => {
-            const params = new URLSearchParams(window.location.search);
-            if (e.target.value) {
-              params.set('search', e.target.value);
-            } else {
-              params.delete('search');
-            }
-            window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
-            window.dispatchEvent(new Event('popstate'));
-          }}
+        
+        <button
+          onClick={openLocationModal}
           style={{
             background: 'rgba(255, 255, 255, 0.1)',
             border: '1px solid rgba(255, 255, 255, 0.2)',
             color: '#e0e6ed',
-            padding: '10px 14px',
-            borderRadius: '8px',
-            fontSize: '14px',
-            width: '220px'
-          }}
-        />
-        
-        <select 
-          onChange={(e) => {
-            const params = new URLSearchParams(window.location.search);
-            if (e.target.value) {
-              params.set('location', e.target.value);
-            } else {
-              params.delete('location');
-            }
-            window.location.search = params.toString();
-          }}
-          style={{
-            background: 'rgba(255, 255, 255, 0.9)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            color: '#333',
             padding: '8px 12px',
             borderRadius: '6px',
             fontSize: '14px',
-            fontWeight: '500'
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.background = 'rgba(255, 255, 255, 0.1)';
           }}
         >
-          <option value="" style={{ color: '#666' }}>📍 Select Location</option>
-          <option value="new-york">🗽 New York</option>
-          <option value="los-angeles">🌴 Los Angeles</option>
-          <option value="chicago">🏙️ Chicago</option>
-          <option value="miami">🏖️ Miami</option>
-          <option value="london">🇬🇧 London</option>
-          <option value="paris">🇫🇷 Paris</option>
-          <option value="tokyo">🇯🇵 Tokyo</option>
-        </select>
+          📍 Select Location
+        </button>
         
         {user ? (
           <>

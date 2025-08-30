@@ -5,14 +5,21 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import HeroBanner from './HeroBanner';
 
+// Global state for location modal
+let globalSetShowLocationModal = null;
+
 const EventList = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [currentTitle, setCurrentTitle] = useState('Home');
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showLocationModal, setShowLocationModal] = useState(false);
   const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Set global reference
+  globalSetShowLocationModal = setShowLocationModal;
 
   useEffect(() => {
     fetchEvents();
@@ -502,9 +509,81 @@ const EventList = () => {
             </div>
           </div>
         )}
+        
+        {showLocationModal && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.8)',
+            backdropFilter: 'blur(10px)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1000
+          }}>
+            <div className="card" style={{ 
+              padding: '30px', 
+              maxWidth: '500px', 
+              width: '90%',
+              textAlign: 'center'
+            }}>
+              <h2 style={{ marginBottom: '25px', color: '#00d4ff' }}>Select Location</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '15px', marginBottom: '20px' }}>
+                {[
+                  { value: 'new-york', label: 'New York', icon: '🗽' },
+                  { value: 'los-angeles', label: 'Los Angeles', icon: '🌴' },
+                  { value: 'chicago', label: 'Chicago', icon: '🏙️' },
+                  { value: 'miami', label: 'Miami', icon: '🏖️' },
+                  { value: 'london', label: 'London', icon: '🇬🇧' },
+                  { value: 'paris', label: 'Paris', icon: '🇫🇷' },
+                  { value: 'tokyo', label: 'Tokyo', icon: '🇯🇵' }
+                ].map(city => (
+                  <button
+                    key={city.value}
+                    onClick={() => {
+                      const params = new URLSearchParams(window.location.search);
+                      params.set('location', city.value);
+                      window.location.search = params.toString();
+                      setShowLocationModal(false);
+                    }}
+                    className="btn-secondary"
+                    style={{ 
+                      padding: '15px 10px', 
+                      fontSize: '12px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '5px'
+                    }}
+                  >
+                    <span style={{ fontSize: '24px' }}>{city.icon}</span>
+                    <span>{city.label}</span>
+                  </button>
+                ))}
+              </div>
+              <button 
+                onClick={() => setShowLocationModal(false)}
+                className="btn-danger"
+                style={{ width: '100%', padding: '12px' }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default EventList;
+
+// Export function to open location modal
+export const openLocationModal = () => {
+  if (globalSetShowLocationModal) {
+    globalSetShowLocationModal(true);
+  }
+};

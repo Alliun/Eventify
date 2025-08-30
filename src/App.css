@@ -11,7 +11,7 @@ html, body {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  background: linear-gradient(135deg, #000000, #111111, #222222);
   color: #e0e6ed;
   min-height: 100vh;
 }
@@ -108,33 +108,43 @@ h1, h2, h3, h4 {
 
 /* Light Theme */
 .light-theme {
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef, #dee2e6) !important;
-  color: #212529 !important;
+  background: linear-gradient(135deg, #f5f5f0, #ebe9e0, #e0ddd0) !important;
+  color: #3a3a3a !important;
 }
 
 .light-theme .card {
-  background: rgba(255, 255, 255, 0.9) !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  color: #212529 !important;
+  background: rgba(250, 248, 245, 0.85) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #3a3a3a !important;
 }
 
 .light-theme input, .light-theme textarea {
-  background: rgba(255, 255, 255, 0.9) !important;
-  border: 1px solid rgba(0, 0, 0, 0.2) !important;
-  color: #212529 !important;
+  background: rgba(250, 248, 245, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  color: #3a3a3a !important;
 }
 
 .light-theme input::placeholder, .light-theme textarea::placeholder {
-  color: rgba(33, 37, 41, 0.6) !important;
+  color: rgba(58, 58, 58, 0.5) !important;
 }
 
 .light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4 {
-  color: #212529 !important;
+  color: #3a3a3a !important;
   text-shadow: none !important;
 }
 
 /* Dark Theme */
 .dark-theme {
-  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important;
+  background: linear-gradient(135deg, #000000, #111111, #222222) !important;
   color: #e0e6ed !important;
+}
+
+.dark-theme .card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme input, .dark-theme textarea {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
