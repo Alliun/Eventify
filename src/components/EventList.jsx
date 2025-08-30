@@ -383,12 +383,30 @@ const EventList = () => {
 
   return (
     <div>
-      <HeroBanner events={events.slice(0, 4)} />
+      <HeroBanner events={events.slice(0, 6)} />
       <div style={{ padding: '20px', maxWidth: '100%', overflow: 'hidden' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '2.5rem', color: '#00d4ff' }}>{currentTitle}</h2>
         <div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', width: '100%' }}>
           {filteredEvents.map(event => (
-          <div key={event.id} className="card" style={{ padding: '20px' }}>
+          <div 
+            key={event.id} 
+            className="card" 
+            style={{ 
+              padding: '20px',
+              transition: 'all 0.3s ease',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.zIndex = '10';
+              e.currentTarget.style.boxShadow = '0 20px 50px rgba(0, 212, 255, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.zIndex = '1';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+            }}
+          >
             {event.image && <img src={event.image} alt={event.title} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '12px', marginBottom: '15px' }} />}
             <h3 style={{ marginBottom: '10px', color: '#00d4ff' }}>{event.title}</h3>
             <p style={{ marginBottom: '10px', opacity: '0.9' }}>{event.description}</p>

@@ -59,18 +59,16 @@ const HeroBanner = ({ events }) => {
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',
-        gap: '10px'
+        gap: '6px'
       }}>
         {events.map((_, index) => (
-          <button
+          <div
             key={index}
             onClick={() => setCurrentIndex(index)}
             style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              border: 'none',
-              background: index === currentIndex ? '#00d4ff' : 'rgba(255,255,255,0.5)',
+              width: '30px',
+              height: '1px',
+              background: index === currentIndex ? '#00d4ff' : 'rgba(255,255,255,0.4)',
               cursor: 'pointer',
               transition: 'all 0.3s'
             }}
