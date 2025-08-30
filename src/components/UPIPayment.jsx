@@ -1,18 +1,7 @@
-import { useState } from 'react';
-
 const UPIPayment = ({ eventTitle, amount, onClose }) => {
-  const [upiId, setUpiId] = useState('');
-  const [showQR, setShowQR] = useState(false);
-
-  const generateQR = () => {
-    if (!upiId) {
-      alert('Please enter UPI ID');
-      return;
-    }
-    setShowQR(true);
-  };
-
-  const upiUrl = `upi://pay?pa=${upiId}&pn=Eventify&am=${amount}&cu=INR&tn=Payment for ${eventTitle}`;
+  const defaultUpiId = '7695886223@fam'; // Default UPI ID
+  
+  const upiUrl = `upi://pay?pa=${defaultUpiId}&pn=Eventify&am=${amount}&cu=INR&tn=Payment for ${eventTitle}`;
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
 
   return (
@@ -33,28 +22,20 @@ const UPIPayment = ({ eventTitle, amount, onClose }) => {
         <p style={{ marginBottom: '15px' }}>Event: {eventTitle}</p>
         <p style={{ marginBottom: '20px' }}>Amount: ₹{amount}</p>
         
-        {!showQR ? (
-          <>
-            <input
-              type="text"
-              placeholder="Enter UPI ID (e.g., user@paytm)"
-              value={upiId}
-              onChange={(e) => setUpiId(e.target.value)}
-              style={{ width: '100%', marginBottom: '20px' }}
-            />
-            <button onClick={generateQR} className="btn-primary" style={{ width: '100%', marginBottom: '10px' }}>
-              Generate QR Code
-            </button>
-          </>
-        ) : (
-          <>
-            <img src={qrUrl} alt="UPI QR Code" style={{ marginBottom: '20px' }} />
-            <p style={{ marginBottom: '20px', fontSize: '14px' }}>Scan this QR code with any UPI app to pay</p>
-            <button onClick={() => setShowQR(false)} className="btn-secondary" style={{ width: '100%', marginBottom: '10px' }}>
-              Change UPI ID
-            </button>
-          </>
-        )}
+        <img src={qrUrl} alt="UPI QR Code" style={{ marginBottom: '20px' }} />
+        <p style={{ marginBottom: '10px', fontSize: '14px' }}>Scan this QR code with any UPI app to pay</p>
+        <p style={{ marginBottom: '20px', fontSize: '12px', opacity: '0.7' }}>Pay to: {defaultUpiId}</p>
+        
+        <button 
+          onClick={() => {
+            alert('Payment completed! Thank you for your booking.');
+            onClose();
+          }}
+          className="btn-success" 
+          style={{ width: '100%', marginBottom: '10px' }}
+        >
+          Mark as Paid
+        </button>
         
         <button onClick={onClose} className="btn-danger" style={{ width: '100%' }}>
           Cancel

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import HeroBanner from './HeroBanner';
 
@@ -15,6 +16,7 @@ const EventList = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showLocationModal, setShowLocationModal] = useState(false);
   const { user } = useAuth();
+  const { addToCart } = useCart();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -384,7 +386,14 @@ const EventList = () => {
       alert('Please login to book events');
       return;
     }
-    navigate('/payment', { state: { eventTitle: event.title, amount: 1 } });
+    navigate('/payment', { 
+      state: { 
+        eventTitle: event.title, 
+        amount: 1,
+        eventDate: event.date,
+        eventLocation: event.location
+      } 
+    });
   };
 
 
@@ -401,22 +410,36 @@ const EventList = () => {
             <h3 style={{ marginBottom: '10px', color: '#00d4ff' }}>{event.title}</h3>
             <p style={{ marginBottom: '5px' }}><strong>📅 Date:</strong> {event.date}</p>
             <p style={{ marginBottom: '20px' }}><strong>📍 Location:</strong> {event.location}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ display: 'flex', gap: '10px' }}>
               <button 
                 onClick={() => setSelectedEvent(event)}
                 className="btn-secondary"
-                style={{ padding: '12px 24px', fontSize: '14px', width: '100%' }}
+                style={{ padding: '12px 24px', fontSize: '14px', flex: '1' }}
               >
                 ℹ️ More Info
               </button>
               <button 
-                onClick={() => bookEvent(event)}
+                onClick={() => {
+                  if (!user) {
+                    alert('Please login to add items to cart');
+                    return;
+                  }
+                  addToCart(event);
+                  alert('Added to cart!');
+                }}
                 className="btn-primary"
-                style={{ padding: '12px 24px', fontSize: '14px', width: '100%' }}
+                style={{ padding: '12px 24px', fontSize: '14px', flex: '1' }}
               >
-                🎫 Book - ₹1
+                🛒 Add to Cart
               </button>
             </div>
+            <button 
+              onClick={() => bookEvent(event)}
+              className="btn-success"
+              style={{ padding: '12px 24px', fontSize: '14px', width: '100%', marginTop: '10px' }}
+            >
+              🎫 Book - ₹1
+            </button>
           </div>
           ))}
         </div>

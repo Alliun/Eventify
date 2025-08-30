@@ -1,33 +1,42 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
 
 const Payment = () => {
-  const [upiId, setUpiId] = useState('');
-  const [showQR, setShowQR] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
+  const [showQR, setShowQR] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { clearCart } = useCart();
   
-  const { eventTitle, amount = 1 } = location.state || {};
+  const { eventTitle, amount = 1, cartItems, isCartCheckout, eventDate, eventLocation } = location.state || {};
+  const defaultUpiId = '7695886223@fam';
 
   if (!eventTitle) {
     navigate('/');
     return null;
   }
 
-  const generateQR = () => {
-    if (!upiId) {
-      alert('Please enter UPI ID');
-      return;
-    }
-    setShowQR(true);
-  };
-
-  const upiUrl = `upi://pay?pa=${upiId}&pn=Eventify&am=${amount}&cu=INR&tn=Payment for ${eventTitle}`;
+  const upiUrl = `upi://pay?pa=${defaultUpiId}&pn=Eventify&am=${amount}&cu=INR&tn=Payment for ${eventTitle}`;
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
 
   const confirmPayment = () => {
-    setPaymentCompleted(true);
+    const ticketId = 'TKT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+    
+    if (isCartCheckout) {
+      clearCart();
+    }
+    
+    navigate('/ticket', {
+      state: {
+        eventTitle,
+        amount,
+        ticketId,
+        eventDate: eventDate || new Date().toLocaleDateString(),
+        eventLocation: eventLocation || 'Event Venue',
+        cartItems: cartItems || []
+      }
+    });
   };
 
   if (paymentCompleted) {
@@ -60,31 +69,43 @@ const Payment = () => {
           <p style={{ fontSize: '24px', fontWeight: 'bold', color: '#00d4ff' }}>₹{amount}</p>
         </div>
         
-        {!showQR ? (
-          <>
-            <input
-              type="text"
-              placeholder="Enter UPI ID (e.g., user@paytm)"
-              value={upiId}
-              onChange={(e) => setUpiId(e.target.value)}
-              style={{ width: '100%', marginBottom: '20px', padding: '15px' }}
-            />
-            <button 
-              onClick={generateQR} 
-              className="btn-primary" 
-              style={{ width: '100%', marginBottom: '15px', padding: '15px' }}
+        <div style={{ marginBottom: '20px', position: 'relative', display: 'inline-block' }}>
+          <img 
+            src={qrUrl} 
+            alt="UPI QR Code" 
+            style={{ 
+              border: '2px solid #00d4ff', 
+              borderRadius: '10px',
+              filter: showQR ? 'none' : 'blur(8px)',
+              transition: 'filter 0.3s ease'
+            }} 
+          />
+          {!showQR && (
+            <button
+              onClick={() => setShowQR(true)}
+              className="btn-primary"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                padding: '10px 20px',
+                fontSize: '14px',
+                borderRadius: '8px'
+              }}
             >
-              Generate QR Code
+              Show QR
             </button>
-          </>
-        ) : (
+          )}
+        </div>
+        
+        {showQR ? (
           <>
-            <div style={{ marginBottom: '20px' }}>
-              <img src={qrUrl} alt="UPI QR Code" style={{ border: '2px solid #00d4ff', borderRadius: '10px' }} />
-            </div>
-            <p style={{ marginBottom: '20px', fontSize: '16px' }}>
+            <p style={{ marginBottom: '10px', fontSize: '16px' }}>
               Scan this QR code with any UPI app to complete payment
             </p>
+            <p style={{ marginBottom: '20px', fontSize: '12px', opacity: '0.7' }}>Pay to: {defaultUpiId}</p>
+            
             <button 
               onClick={confirmPayment} 
               className="btn-success" 
@@ -92,14 +113,11 @@ const Payment = () => {
             >
               ✓ Payment Done
             </button>
-            <button 
-              onClick={() => setShowQR(false)} 
-              className="btn-secondary" 
-              style={{ width: '100%', marginBottom: '15px', padding: '12px' }}
-            >
-              Change UPI ID
-            </button>
           </>
+        ) : (
+          <p style={{ marginBottom: '20px', fontSize: '16px', opacity: '0.7' }}>
+            Click "Show QR" to reveal the payment QR code
+          </p>
         )}
         
         <button 

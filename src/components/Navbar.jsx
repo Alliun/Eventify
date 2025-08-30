@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useCart } from '../contexts/CartContext';
 import { openLocationModal } from './EventList';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
+  const { getCartCount } = useCart();
 
   const handleLogout = async () => {
     try {
@@ -85,6 +87,58 @@ const Navbar = () => {
         >
           📍 Select Location
         </button>
+        
+        {user && (
+          <Link
+            to="/cart"
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              color: '#e0e6ed',
+              padding: '8px',
+              borderRadius: '50%',
+              fontSize: '16px',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              width: '36px',
+              height: '36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textDecoration: 'none',
+              position: 'relative'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.background = 'rgba(0, 212, 255, 0.2)';
+              e.target.style.transform = 'scale(1.1)';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+              e.target.style.transform = 'scale(1)';
+            }}
+          >
+            🛒
+            {getCartCount() > 0 && (
+              <span style={{
+                position: 'absolute',
+                top: '-5px',
+                right: '-5px',
+                background: '#ff4757',
+                color: 'white',
+                borderRadius: '50%',
+                width: '18px',
+                height: '18px',
+                fontSize: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold'
+              }}>
+                {getCartCount()}
+              </span>
+            )}
+          </Link>
+        )}
         
         {user ? (
           <>
