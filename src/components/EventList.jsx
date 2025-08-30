@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import HeroBanner from './HeroBanner';
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
-  const [currentTitle, setCurrentTitle] = useState('Events');
+  const [currentTitle, setCurrentTitle] = useState('Home');
   const { user } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchEvents();
@@ -28,8 +29,8 @@ const EventList = () => {
       case 'stream': setCurrentTitle('Stream'); break;
       case 'sports': setCurrentTitle('Sports'); break;
       case 'activities': setCurrentTitle('Activities'); break;
-      case 'events':
-      default: setCurrentTitle('Events'); break;
+      case 'events': setCurrentTitle('Events'); break;
+      default: setCurrentTitle('Home'); break;
     }
     
     let filtered = events;
@@ -63,16 +64,6 @@ const EventList = () => {
       const category = params.get('category');
       const locationFilter = params.get('location');
       const searchQuery = params.get('search');
-      
-      // Update title based on category
-      switch(category) {
-        case 'movies': setCurrentTitle('Movies'); break;
-        case 'stream': setCurrentTitle('Stream'); break;
-        case 'sports': setCurrentTitle('Sports'); break;
-        case 'activities': setCurrentTitle('Activities'); break;
-        case 'events':
-        default: setCurrentTitle('Events'); break;
-      }
       
       let filtered = events;
       
@@ -175,7 +166,7 @@ const EventList = () => {
         description: 'Classic horror films screening under the stars',
         date: '2024-10-31',
         location: 'Drive-in Theater, Austin',
-        image: 'https://images.unsplash.com/photo-1489599904472-af35ff2c7c3f?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&h=300&fit=crop',
         category: 'movies'
       },
       {
@@ -274,7 +265,7 @@ const EventList = () => {
         description: 'Award-winning nature documentary premiere',
         date: '2024-09-20',
         location: 'Independent Theater, Brooklyn',
-        image: 'https://images.unsplash.com/photo-1489599904472-af35ff2c7c3f?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&h=300&fit=crop',
         category: 'movies'
       },
       {
@@ -301,7 +292,7 @@ const EventList = () => {
         description: 'Blockbuster action films with surround sound',
         date: '2024-11-15',
         location: 'IMAX Theater, Atlanta',
-        image: 'https://images.unsplash.com/photo-1489599904472-af35ff2c7c3f?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=500&h=300&fit=crop',
         category: 'movies'
       },
       {
@@ -346,7 +337,7 @@ const EventList = () => {
         description: 'Best animated films from around the world',
         date: '2024-12-10',
         location: 'Animation Theater, Burbank',
-        image: 'https://images.unsplash.com/photo-1489599904472-af35ff2c7c3f?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=300&fit=crop',
         category: 'movies'
       },
       {
@@ -380,32 +371,22 @@ const EventList = () => {
     setEvents(sampleEvents);
   };
 
-  const bookEvent = async (eventId) => {
+  const bookEvent = (event) => {
     if (!user) {
       alert('Please login to book events');
       return;
     }
-    
-    try {
-      await addDoc(collection(db, 'bookings'), {
-        userId: user.uid,
-        eventId: eventId,
-        bookedAt: new Date()
-      });
-      alert('Event booked successfully!');
-    } catch (error) {
-      alert('Error booking event: ' + error.message);
-    }
+    navigate('/payment', { state: { eventTitle: event.title, amount: 1 } });
   };
 
 
 
   return (
     <div>
-      <HeroBanner events={events.slice(0, 5)} />
-      <div style={{ padding: '30px' }}>
+      <HeroBanner events={events.slice(0, 4)} />
+      <div style={{ padding: '20px', maxWidth: '100%', overflow: 'hidden' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '30px', fontSize: '2.5rem', color: '#00d4ff' }}>{currentTitle}</h2>
-        <div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+        <div style={{ display: 'grid', gap: '20px', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', width: '100%' }}>
           {filteredEvents.map(event => (
           <div key={event.id} className="card" style={{ padding: '20px' }}>
             {event.image && <img src={event.image} alt={event.title} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '12px', marginBottom: '15px' }} />}
@@ -414,11 +395,11 @@ const EventList = () => {
             <p style={{ marginBottom: '5px' }}><strong>📅 Date:</strong> {event.date}</p>
             <p style={{ marginBottom: '20px' }}><strong>📍 Location:</strong> {event.location}</p>
             <button 
-              onClick={() => bookEvent(event.id)}
+              onClick={() => bookEvent(event)}
               className="btn-primary"
               style={{ padding: '12px 24px', fontSize: '14px', width: '100%' }}
             >
-              🎫 Book Event
+              🎫 Book Event - ₹1
             </button>
           </div>
           ))}

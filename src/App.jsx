@@ -6,6 +6,7 @@ import EventList from './components/EventList';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import AdminPanel from './components/AdminPanel';
+import Payment from './components/Payment';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/payment" element={<Payment />} />
             </Routes>
           </div>
         </Router>

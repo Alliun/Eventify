@@ -1,8 +1,19 @@
 import { useState, useEffect } from 'react';
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import { useAuth } from '../contexts/AuthContext';
 
 const AdminPanel = () => {
+  const { user } = useAuth();
+
+  if (!user || user.email !== 'admin@eventify.com') {
+    return (
+      <div style={{ padding: '50px', textAlign: 'center' }}>
+        <h2>Access Denied</h2>
+        <p>You don't have permission to access this page.</p>
+      </div>
+    );
+  }
   const [events, setEvents] = useState([]);
   const [formData, setFormData] = useState({
     title: '',

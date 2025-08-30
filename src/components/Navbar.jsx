@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav style={{ 
-      padding: '15px 0px 15px 30px', 
+      padding: '15px 20px', 
       background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 212, 255, 0.1))',
       backdropFilter: 'blur(20px)',
       borderBottom: '1px solid rgba(0, 212, 255, 0.3)',
@@ -24,10 +24,13 @@ const Navbar = () => {
       display: 'grid',
       gridTemplateColumns: '1fr auto 1fr',
       alignItems: 'center',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+      width: '100%',
+      maxWidth: '100vw',
+      overflow: 'hidden'
     }}>
       {/* Left - Categories */}
-      <div style={{ display: 'flex', gap: '20px', alignItems: 'center', paddingRight: '60px' }}>
+      <div style={{ display: 'flex', gap: '15px', alignItems: 'center', paddingRight: '20px', flexWrap: 'wrap' }}>
         <Link to="/" className="nav-link" style={{ color: 'white', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'all 0.3s' }}>🏠 Home</Link>
         <Link to="/?category=events" className="nav-link" style={{ color: 'white', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'all 0.3s' }}>🎪 Events</Link>
         <Link to="/?category=movies" className="nav-link" style={{ color: 'white', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'all 0.3s' }}>🎬 Movies</Link>
@@ -44,13 +47,17 @@ const Navbar = () => {
         fontWeight: 'bold',
         textShadow: '0 0 15px rgba(0, 212, 255, 0.7)',
         letterSpacing: '2px',
-        textAlign: 'center'
+        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: '-50px'
       }}>
         ✨ Eventify
       </Link>
       
       {/* Right - Search, Location, User */}
-      <div style={{ display: 'flex', gap: '30px', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '50px' }}>
+      <div style={{ display: 'flex', gap: '15px', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '10px', flexWrap: 'wrap' }}>
         <input
           type="text"
           placeholder="🔍 Search events..."
@@ -108,7 +115,9 @@ const Navbar = () => {
         {user ? (
           <>
             <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none', fontSize: '14px' }}>Dashboard</Link>
-            <Link to="/admin" style={{ color: 'white', textDecoration: 'none', fontSize: '14px' }}>Admin</Link>
+            {user.email === 'admin@eventify.com' && (
+              <Link to="/admin" style={{ color: 'white', textDecoration: 'none', fontSize: '14px' }}>Admin</Link>
+            )}
             <button 
               onClick={handleLogout}
               className="btn-danger"

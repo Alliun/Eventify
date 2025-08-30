@@ -61,7 +61,7 @@ const HeroBanner = ({ events }) => {
         display: 'flex',
         gap: '10px'
       }}>
-        {events.slice(0, 5).map((_, index) => (
+        {events.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
