@@ -38,6 +38,9 @@ const Navbar = () => {
         <Link to="/?category=stream" className="nav-link" style={{ color: 'white', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'all 0.3s' }}>📺 Stream</Link>
         <Link to="/?category=sports" className="nav-link" style={{ color: 'white', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'all 0.3s' }}>⚽ Sports</Link>
         <Link to="/?category=activities" className="nav-link" style={{ color: 'white', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'all 0.3s' }}>🎯 Activities</Link>
+        {user && (
+          <span style={{ color: '#00d4ff', fontSize: '14px', fontWeight: '500' }}>Hello {user.email} !!!</span>
+        )}
       </div>
       
       {/* Center - Logo */}
