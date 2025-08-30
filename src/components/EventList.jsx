@@ -130,7 +130,7 @@ const EventList = () => {
         description: 'Watch all Marvel movies back-to-back with fellow fans',
         date: '2024-07-25',
         location: 'IMAX Theater, Los Angeles',
-        image: 'https://images.unsplash.com/photo-1489599904472-af35ff2c7c3f?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=500&h=300&fit=crop',
         category: 'movies'
       },
       {
@@ -364,7 +364,7 @@ const EventList = () => {
         description: 'Immersive VR gaming and experiences',
         date: '2024-07-18',
         location: 'VR Arcade, Tokyo',
-        image: 'https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=500&h=300&fit=crop',
+        image: 'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=500&h=300&fit=crop',
         category: 'stream'
       }
     ];
