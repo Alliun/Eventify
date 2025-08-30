@@ -71,12 +71,12 @@ button:hover {
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, #00d4ff, #0099cc);
+  background: linear-gradient(45deg, #ffeaa7, #fdcb6e);
   color: white;
 }
 
 .btn-success {
-  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  background: linear-gradient(45deg, #667eea, #764ba2);
   color: white;
 }
 

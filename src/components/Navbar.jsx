@@ -94,7 +94,7 @@ const Navbar = () => {
             style={{
               background: 'rgba(255, 255, 255, 0.1)',
               border: '1px solid rgba(255, 255, 255, 0.2)',
-              color: '#e0e6ed',
+              color: '#00d4ff',
               padding: '8px',
               borderRadius: '50%',
               fontSize: '16px',
