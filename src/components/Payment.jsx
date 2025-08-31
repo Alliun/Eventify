@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { useBooking } from '../contexts/BookingContext';
@@ -7,6 +7,8 @@ import { useAuth } from '../contexts/AuthContext';
 const Payment = () => {
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [paymentEnabled, setPaymentEnabled] = useState(false);
+  const [countdown, setCountdown] = useState(60);
   const location = useLocation();
   const navigate = useNavigate();
   const { clearCart } = useCart();
@@ -23,6 +25,22 @@ const Payment = () => {
 
   const upiUrl = `upi://pay?pa=${defaultUpiId}&pn=Eventify&am=${amount}&cu=INR&tn=Payment for ${eventTitle}`;
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+
+  useEffect(() => {
+    let timer;
+    if (showQR && !paymentEnabled) {
+      timer = setInterval(() => {
+        setCountdown(prev => {
+          if (prev <= 1) {
+            setPaymentEnabled(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [showQR, paymentEnabled]);
 
   const confirmPayment = () => {
     const ticketId = 'TKT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
@@ -138,13 +156,19 @@ const Payment = () => {
             </p>
             <p style={{ marginBottom: '20px', fontSize: '12px', opacity: '0.7' }}>Pay to: {defaultUpiId}</p>
             
-            <button 
-              onClick={confirmPayment} 
-              className="btn-success" 
-              style={{ width: '100%', marginBottom: '15px', padding: '12px' }}
-            >
-              ✓ Payment Done
-            </button>
+            {paymentEnabled ? (
+              <button 
+                onClick={confirmPayment} 
+                className="btn-success"
+                style={{ width: '100%', marginBottom: '15px', padding: '12px' }}
+              >
+                ✓ Payment Done
+              </button>
+            ) : (
+              <p style={{ marginBottom: '15px', fontSize: '16px', color: '#00d4ff' }}>
+                Please wait {countdown} seconds to confirm payment...
+              </p>
+            )}
           </>
         ) : (
           <p style={{ marginBottom: '20px', fontSize: '16px', opacity: '0.7' }}>
