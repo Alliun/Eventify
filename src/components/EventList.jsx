@@ -114,7 +114,8 @@ const EventList = () => {
         date: '2024-07-15',
         location: 'Central Park, New York',
         image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500&h=300&fit=crop',
-        category: 'events'
+        category: 'events',
+        price: 2500
       },
       {
         id: '2',
@@ -123,7 +124,8 @@ const EventList = () => {
         date: '2024-06-20',
         location: 'Convention Center, San Francisco',
         image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&h=300&fit=crop',
-        category: 'events'
+        category: 'events',
+        price: 3500
       },
       {
         id: '3',
@@ -132,7 +134,8 @@ const EventList = () => {
         date: '2024-08-10',
         location: 'Miami Beach, Florida',
         image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&h=300&fit=crop',
-        category: 'events'
+        category: 'events',
+        price: 1800
       },
       {
         id: '4',
@@ -141,7 +144,8 @@ const EventList = () => {
         date: '2024-07-25',
         location: 'IMAX Theater, Los Angeles',
         image: 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=500&h=300&fit=crop',
-        category: 'movies'
+        category: 'movies',
+        price: 1200
       },
       {
         id: '5',
@@ -150,7 +154,8 @@ const EventList = () => {
         date: '2024-06-30',
         location: 'Online Stream',
         image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&h=300&fit=crop',
-        category: 'stream'
+        category: 'stream',
+        price: 800
       },
       {
         id: '6',
@@ -159,7 +164,8 @@ const EventList = () => {
         date: '2024-09-15',
         location: 'Wembley Stadium, London',
         image: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=500&h=300&fit=crop',
-        category: 'sports'
+        category: 'sports',
+        price: 4200
       },
       {
         id: '7',
@@ -168,7 +174,8 @@ const EventList = () => {
         date: '2024-08-05',
         location: 'Modern Art Museum, Chicago',
         image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=300&fit=crop',
-        category: 'activities'
+        category: 'activities',
+        price: 750
       },
       {
         id: '8',
@@ -177,7 +184,8 @@ const EventList = () => {
         date: '2024-10-31',
         location: 'Drive-in Theater, Austin',
         image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&h=300&fit=crop',
-        category: 'movies'
+        category: 'movies',
+        price: 950
       },
       {
         id: '9',
@@ -186,7 +194,8 @@ const EventList = () => {
         date: '2024-07-30',
         location: 'Sports Arena, Phoenix',
         image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500&h=300&fit=crop',
-        category: 'sports'
+        category: 'sports',
+        price: 2800
       },
       {
         id: '10',
@@ -195,7 +204,8 @@ const EventList = () => {
         date: '2024-06-25',
         location: 'Culinary Institute, Boston',
         image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&h=300&fit=crop',
-        category: 'activities'
+        category: 'activities',
+        price: 1500
       },
       {
         id: '11',
@@ -204,7 +214,8 @@ const EventList = () => {
         date: '2024-08-20',
         location: 'Studio, Seattle',
         image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=500&h=300&fit=crop',
-        category: 'stream'
+        category: 'stream',
+        price: 650
       },
       {
         id: '12',
@@ -213,7 +224,8 @@ const EventList = () => {
         date: '2024-09-10',
         location: 'Blue Note, New Orleans',
         image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop',
-        category: 'events'
+        category: 'events',
+        price: 1800
       },
       {
         id: '13',
@@ -222,7 +234,8 @@ const EventList = () => {
         date: '2024-07-12',
         location: 'Comedy Club, Las Vegas',
         image: 'https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=500&h=300&fit=crop',
-        category: 'events'
+        category: 'events',
+        price: 1200
       },
       {
         id: '14',
@@ -231,7 +244,8 @@ const EventList = () => {
         date: '2024-08-15',
         location: 'Cinema Complex, Denver',
         image: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=500&h=300&fit=crop',
-        category: 'movies'
+        category: 'movies',
+        price: 1100
       },
       {
         id: '15',
@@ -240,7 +254,8 @@ const EventList = () => {
         date: '2024-09-05',
         location: 'Tennis Center, Miami',
         image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=500&h=300&fit=crop',
-        category: 'sports'
+        category: 'sports',
+        price: 3200
       },
       {
         id: '16',
@@ -249,7 +264,8 @@ const EventList = () => {
         date: '2024-06-18',
         location: 'Art Studio, Portland',
         image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=500&h=300&fit=crop',
-        category: 'activities'
+        category: 'activities',
+        price: 900
       },
       {
         id: '17',
@@ -258,7 +274,8 @@ const EventList = () => {
         date: '2024-07-08',
         location: 'Online Platform',
         image: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500&h=300&fit=crop',
-        category: 'stream'
+        category: 'stream',
+        price: 750
       },
       {
         id: '18',
@@ -267,7 +284,8 @@ const EventList = () => {
         date: '2024-08-25',
         location: 'Stadium, Detroit',
         image: 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=500&h=300&fit=crop',
-        category: 'events'
+        category: 'events',
+        price: 2900
       },
       {
         id: '19',
@@ -276,7 +294,8 @@ const EventList = () => {
         date: '2024-09-20',
         location: 'Independent Theater, Brooklyn',
         image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&h=300&fit=crop',
-        category: 'movies'
+        category: 'movies',
+        price: 800
       },
       {
         id: '20',
@@ -285,7 +304,8 @@ const EventList = () => {
         date: '2024-10-05',
         location: 'Mountain Resort, Colorado',
         image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop',
-        category: 'activities'
+        category: 'activities',
+        price: 3800
       },
       {
         id: '21',
@@ -294,7 +314,8 @@ const EventList = () => {
         date: '2024-09-28',
         location: 'Fashion Week, Milan',
         image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&h=300&fit=crop',
-        category: 'events'
+        category: 'events',
+        price: 4500
       },
       {
         id: '22',
@@ -303,7 +324,8 @@ const EventList = () => {
         date: '2024-11-15',
         location: 'IMAX Theater, Atlanta',
         image: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=500&h=300&fit=crop',
-        category: 'movies'
+        category: 'movies',
+        price: 1300
       },
       {
         id: '23',
@@ -312,7 +334,8 @@ const EventList = () => {
         date: '2024-08-12',
         location: 'Aquatic Center, Orlando',
         image: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=500&h=300&fit=crop',
-        category: 'sports'
+        category: 'sports',
+        price: 2200
       },
       {
         id: '24',
@@ -321,7 +344,8 @@ const EventList = () => {
         date: '2024-07-22',
         location: 'Dance Studio, Miami',
         image: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=500&h=300&fit=crop',
-        category: 'activities'
+        category: 'activities',
+        price: 1100
       },
       {
         id: '25',
@@ -330,7 +354,8 @@ const EventList = () => {
         date: '2024-06-28',
         location: 'Online Concert Hall',
         image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop',
-        category: 'stream'
+        category: 'stream',
+        price: 550
       },
       {
         id: '26',
@@ -339,7 +364,8 @@ const EventList = () => {
         date: '2024-10-18',
         location: 'Wine Bar, San Francisco',
         image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=500&h=300&fit=crop',
-        category: 'events'
+        category: 'events',
+        price: 2100
       },
       {
         id: '27',
@@ -348,7 +374,8 @@ const EventList = () => {
         date: '2024-12-10',
         location: 'Animation Theater, Burbank',
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=300&fit=crop',
-        category: 'movies'
+        category: 'movies',
+        price: 1000
       },
       {
         id: '28',
@@ -357,7 +384,8 @@ const EventList = () => {
         date: '2024-11-03',
         location: 'Downtown, Boston',
         image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=300&fit=crop',
-        category: 'sports'
+        category: 'sports',
+        price: 1600
       },
       {
         id: '29',
@@ -366,7 +394,8 @@ const EventList = () => {
         date: '2024-08-08',
         location: 'Art Center, Santa Fe',
         image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=300&fit=crop',
-        category: 'activities'
+        category: 'activities',
+        price: 850
       },
       {
         id: '30',
@@ -375,7 +404,8 @@ const EventList = () => {
         date: '2024-07-18',
         location: 'VR Arcade, Tokyo',
         image: 'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=500&h=300&fit=crop',
-        category: 'stream'
+        category: 'stream',
+        price: 1400
       }
     ];
     setEvents(sampleEvents);
@@ -389,7 +419,7 @@ const EventList = () => {
     navigate('/payment', { 
       state: { 
         eventTitle: event.title, 
-        amount: 1,
+        amount: event.price,
         eventDate: event.date,
         eventLocation: event.location
       } 
@@ -409,36 +439,28 @@ const EventList = () => {
             {event.image && <img src={event.image} alt={event.title} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '12px', marginBottom: '15px' }} />}
             <h3 style={{ marginBottom: '10px', color: '#00d4ff' }}>{event.title}</h3>
             <p style={{ marginBottom: '5px' }}><strong>📅 Date:</strong> {event.date}</p>
-            <p style={{ marginBottom: '20px' }}><strong>📍 Location:</strong> {event.location}</p>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button 
-                onClick={() => setSelectedEvent(event)}
-                className="btn-secondary"
-                style={{ padding: '12px 24px', fontSize: '14px', flex: '1' }}
-              >
-                ℹ️ More Info
-              </button>
-              <button 
-                onClick={() => {
-                  if (!user) {
-                    alert('Please login to add items to cart');
-                    return;
-                  }
-                  addToCart(event);
-                  alert('Added to cart!');
-                }}
-                className="btn-primary"
-                style={{ padding: '12px 24px', fontSize: '14px', flex: '1' }}
-              >
-                🛒 Add to Cart
-              </button>
-            </div>
+            <p style={{ marginBottom: '5px' }}><strong>📍 Location:</strong> {event.location}</p>
+            <p style={{ marginBottom: '20px' }}><strong>💰 Price:</strong> ₹{event.price}</p>
             <button 
-              onClick={() => bookEvent(event)}
-              className="btn-success"
-              style={{ padding: '12px 24px', fontSize: '14px', width: '100%', marginTop: '10px' }}
+              onClick={() => setSelectedEvent(event)}
+              className="btn-secondary"
+              style={{ padding: '12px 24px', fontSize: '14px', width: '100%', marginBottom: '10px' }}
             >
-              🎫 Book - ₹1
+              ℹ️ More Info
+            </button>
+            <button 
+              onClick={() => {
+                if (!user) {
+                  alert('Please login to add items to cart');
+                  return;
+                }
+                addToCart(event);
+                alert('Added to cart!');
+              }}
+              className="btn-primary"
+              style={{ padding: '12px 24px', fontSize: '14px', width: '100%' }}
+            >
+              🛒 Add to Cart
             </button>
           </div>
           ))}
@@ -490,7 +512,7 @@ const EventList = () => {
                 <p style={{ marginBottom: '8px' }}><strong>📅 Date:</strong> {selectedEvent.date}</p>
                 <p style={{ marginBottom: '8px' }}><strong>📍 Location:</strong> {selectedEvent.location}</p>
                 <p style={{ marginBottom: '8px' }}><strong>🏷️ Category:</strong> {selectedEvent.category}</p>
-                <p style={{ marginBottom: '8px' }}><strong>💰 Price:</strong> ₹1</p>
+                <p style={{ marginBottom: '8px' }}><strong>💰 Price:</strong> ₹{selectedEvent.price}</p>
               </div>
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button 
@@ -501,7 +523,7 @@ const EventList = () => {
                   className="btn-primary"
                   style={{ padding: '12px 24px', fontSize: '14px', flex: '1' }}
                 >
-                  🎫 Book Event - ₹1
+                  🎫 Book Event - ₹{selectedEvent.price}
                 </button>
                 <button 
                   onClick={() => setSelectedEvent(null)}

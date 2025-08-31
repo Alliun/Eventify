@@ -15,7 +15,7 @@ const Payment = () => {
   const { addBooking } = useBooking();
   const { user } = useAuth();
   
-  const { eventTitle, amount = 1, cartItems, isCartCheckout, eventDate, eventLocation } = location.state || {};
+  const { eventTitle, amount, cartItems, isCartCheckout, eventDate, eventLocation } = location.state || {};
   const defaultUpiId = '7695886223@fam';
 
   if (!eventTitle) {
